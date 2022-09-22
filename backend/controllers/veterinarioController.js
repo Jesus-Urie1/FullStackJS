@@ -69,7 +69,7 @@ const authenticar = async (req, res) => {
 
   //Revisar el password
   if (await usuario.comprobarPassword(password)) {
-    //Authenticar al usuario
+    //Authenticar al usuario con JWT
     res.json({ token: generarJWT(usuario.id) });
   } else {
     const error = new Error("Password incorrecto");
