@@ -1,7 +1,7 @@
 import Veterinario from "../models/Veterinario.js";
 
 const registrar = async (req, res) => {
-  const { email } = req.body;
+  const { email } = req.body; //Cuando llenas un formulario
 
   //Revisar se ya existe el usuario
   const existeUsuario = await Veterinario.findOne({ email });
@@ -25,4 +25,9 @@ const perfil = (req, res) => {
   res.json({ msg: "Mostrando perfil" });
 };
 
-export { registrar, perfil };
+const confirmar = (req, res) => {
+  console.log(req.params.token); //Leer datos de la URL
+  res.json({ msg: "Confirmando cuenta" });
+};
+
+export { registrar, perfil, confirmar };
