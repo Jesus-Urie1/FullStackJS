@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 import generarId from "../helpers/generarId.js";
 
 //Schema de Veterinario
@@ -36,6 +37,16 @@ const veterinarioSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+});
+
+//Hasheando el password
+veterinarioSchema.pre("save", async function (next) {
+  //Un password que ya esta hasheado, no lo vuelva a hashear
+  if (!this.isModified("password")) {
+    next();
+  }
+  const salt = await bcrypt.genSalt(10); //Generar el Salt
+  this.password = await bcrypt.hash(this.password, salt); //Hasheando el password
 });
 
 const Veterinario = mongoose.model("Veterinario", veterinarioSchema); //Registrar el modelo

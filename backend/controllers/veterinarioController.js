@@ -1,5 +1,6 @@
 import Veterinario from "../models/Veterinario.js";
 
+//Controller Registrar cuenta
 const registrar = async (req, res) => {
   const { email } = req.body; //Cuando llenas un formulario
 
@@ -25,6 +26,7 @@ const perfil = (req, res) => {
   res.json({ msg: "Mostrando perfil" });
 };
 
+//Controller Confirmar cuenta
 const confirmar = async (req, res) => {
   const { token } = req.params; //Leer datos de la URL
 
