@@ -1,4 +1,5 @@
 import Veterinario from "../models/Veterinario.js";
+import generarJWT from "../helpers/generarJWT.js";
 
 //Controller Registrar cuenta
 const registrar = async (req, res) => {
@@ -48,4 +49,31 @@ const confirmar = async (req, res) => {
   }
 };
 
-export { registrar, perfil, confirmar };
+//Controller Authenticar
+const authenticar = async (req, res) => {
+  const { email, password } = req.body;
+
+  //Comprobar si usuario existe
+  const usuario = await Veterinario.findOne({ email });
+
+  if (!usuario) {
+    const error = new Error("El usuario no existe");
+    return res.status(404).json({ msg: error.message });
+  }
+
+  //Comprobar si el usuario esta confirmado
+  if (!usuario.confirmado) {
+    const error = new Error("Tu cuenta no a sido confirmada");
+    return res.status(403).json({ msg: error.message });
+  }
+
+  //Revisar el password
+  if (await usuario.comprobarPassword(password)) {
+    //Authenticar al usuario
+    res.json({ token: generarJWT(usuario.id) });
+  } else {
+    const error = new Error("Password incorrecto");
+    return res.status(403).json({ msg: error.message });
+  }
+};
+export { registrar, perfil, confirmar, authenticar };
