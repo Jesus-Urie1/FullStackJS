@@ -12,6 +12,7 @@ const checkAuth = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+      //Guardando informacion de la BD
       req.veterinario = await Veterinario.findById(decoded.id).select(
         "-password -token -confirmado"
       );
