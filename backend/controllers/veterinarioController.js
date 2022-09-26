@@ -77,4 +77,22 @@ const authenticar = async (req, res) => {
     return res.status(403).json({ msg: error.message });
   }
 };
-export { registrar, perfil, confirmar, authenticar };
+
+//Controller Olvide Password
+const olvidePassword = (req, res) => {};
+
+//Controller Comprobar Token
+const comprobarToken = (req, res) => {};
+
+//Controller Nuevo password
+const nuevoPassword = (req, res) => {};
+
+export {
+  registrar,
+  perfil,
+  confirmar,
+  authenticar,
+  olvidePassword,
+  comprobarToken,
+  nuevoPassword,
+};
