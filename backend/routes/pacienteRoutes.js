@@ -4,7 +4,8 @@ import {
   agregarPaciente,
   obtenerPaciente,
 } from "../controllers/pacienteController.js";
+import checkAuth from "../middleware/authMiddleware.js";
 
-router.route("/").post(agregarPaciente).get(obtenerPaciente);
+router.route("/").post(checkAuth, agregarPaciente).get(obtenerPaciente);
 
 export default router;
