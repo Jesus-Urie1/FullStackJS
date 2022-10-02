@@ -16,7 +16,10 @@ function ConfirmarCuenta() {
       try {
         const url = `${import.meta.env.VITE_BACKEND_URL}/api/veterinarios/confirmar/${id}`
         const {data} = await axios(url)
-        console.log(data)
+        setCuentaConfirmada(true)
+        setAlerta({
+          msg: data.msg,
+        })
       } catch (error) {
         setAlerta({
           msg: error.response.data.msg,
