@@ -36,7 +36,7 @@ const registrar = async (req, res) => {
 //Controller Perfil
 const perfil = (req, res) => {
   const { veterinario } = req;
-  res.json({ veterinario });
+  res.json(veterinario);
 };
 
 //Controller Confirmar cuenta
