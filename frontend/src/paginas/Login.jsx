@@ -5,7 +5,7 @@ import Alerta from "../components/Alerta";
 import clientesAxios from "../config/axios";
 
 const Login = () => {
-  const { auth } = useAuth();
+  const { setAuth } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +32,7 @@ const Login = () => {
         password,
       });
       localStorage.setItem("token", data.token);
+      setAuth(data);
       navigate("/admin");
     } catch (error) {
       setAlerta({
