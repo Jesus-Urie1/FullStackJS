@@ -1,4 +1,8 @@
+import usePacientes from "../hooks/usePacientes";
+
 const Paciente = ({ paciente }) => {
+  const { setEdicion } = usePacientes();
+
   const { email, fecha, nombre, propietario, sintomas, _id } = paciente;
 
   const formatearFecha = (fecha) => {
@@ -34,14 +38,17 @@ const Paciente = ({ paciente }) => {
         Sintomas:{" "}
         <span className="font-normal normal-case text-black">{sintomas}</span>
       </p>
+
       <div className="flex justify-start my-5">
         <button
           type="button"
           className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 
           text-white uppercase font-bold rounded-lg"
+          onClick={() => setEdicion(paciente)}
         >
           Editar
         </button>
+
         <button
           type="button"
           className="py-2 px-10 bg-red-600 hover:bg-red-700 
