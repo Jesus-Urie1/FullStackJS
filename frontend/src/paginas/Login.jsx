@@ -51,7 +51,7 @@ const Login = () => {
         </h1>
       </div>
 
-      <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
+      <div className="mt-20 md:mt-5 shadow-xl px-5 py-10 rounded-xl bg-white">
         {msg && <Alerta alerta={alerta} />}
         <form onSubmit={handleSubmit}>
           <div className="my-5">
