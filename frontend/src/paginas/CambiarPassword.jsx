@@ -1,12 +1,37 @@
 import { useState } from "react";
 import AdminNav from "../components/AdminNav";
 import Alerta from "../components/Alerta";
+import useAuth from "../hooks/useAuth";
 
 const CambiarPassword = () => {
+  const { guardarPassword } = useAuth();
+
   const [alerta, setAlerta] = useState({});
+  const [password, setPassword] = useState({
+    pwd_actual: "",
+    pwd_nueva: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (Object.values(password).some((campo) => campo === "")) {
+      setAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+      });
+      return;
+    }
+
+    if (password.pwd_nueva.length < 6) {
+      setAlerta({
+        msg: "El password debe tener minimo 6 caracteres",
+        error: true,
+      });
+      return;
+    }
+
+    guardarPassword(password);
   };
 
   const { msg } = alerta;
@@ -32,10 +57,16 @@ const CambiarPassword = () => {
                 Password Actual
               </label>
               <input
-                type="text"
+                type="password"
                 className="border bg-gray-50 w-full p-2 mt-5 rounded-lg"
-                name="nombre"
+                name="pwd_actual"
                 placeholder="Escribe tu password actual"
+                onChange={(e) =>
+                  setPassword({
+                    ...password,
+                    [e.target.name]: e.target.value,
+                  })
+                }
               />
             </div>
 
@@ -44,10 +75,16 @@ const CambiarPassword = () => {
                 Password Nuevo
               </label>
               <input
-                type="text"
+                type="password"
                 className="border bg-gray-50 w-full p-2 mt-5 rounded-lg"
-                name="nombre"
+                name="pwd_nueva"
                 placeholder="Escribe tu nuevo password"
+                onChange={(e) =>
+                  setPassword({
+                    ...password,
+                    [e.target.name]: e.target.value,
+                  })
+                }
               />
             </div>
 
